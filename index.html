@@ -1,0 +1,56 @@
+<script>
+    
+    function computerPlay(){
+        computerHand = Math.floor(Math.random() * Math.floor(3)) + 1;
+        
+        switch(computerHand) {
+            case 1:
+                return "Rock";
+                break;
+            case 2:
+                return "Paper";
+                break;
+            case 3:
+                return "Scissors";
+                break;
+        }
+    }
+
+    function playRound(playerSelection, computerSelection){
+        let gameTie = `Tie! You both picked ${playerSelection}!`;
+        let gamePlayerWin = `You win! ${playerSelection} beats ${computerSelection}`;
+        let gameComputerWin = `You lose! ${computerSelection} beats ${playerSelection}`;
+
+        
+
+        if (playerSelection === "rock"){
+            if (computerSelection === "Rock"){
+                return gameTie;
+            }
+            else if (computerSelection === "Paper"){
+                return gameComputerWin;
+            }
+
+            else{
+                return gamePlayerWin;
+            }
+        }
+    }
+
+    function game(){
+        for (let i = 0; i < 5; i++){
+            let playerSelection = "rock";
+            let computerSelection = computerPlay();
+            roundResult = playRound(playerSelection, computerSelection);
+       
+            console.log(playerSelection);
+            console.log(computerSelection);
+            console.log(roundResult);
+
+
+        }
+    }
+
+
+
+</script>
