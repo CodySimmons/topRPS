@@ -19,26 +19,26 @@ function computerPlay() {
 }
 
 //window prompt for player's choice. lower cases player input for ease
-function userPlay() {
-  let playerSelection = prompt(
-    "Please enter rock, paper, or scissors:",
-    "rock/paper/scissors"
-  );
-  while (true) {
-    playerSelection = playerSelection.toLowerCase();
-    if (
-      playerSelection === "rock" ||
-      playerSelection === "paper" ||
-      playerSelection === "scissors"
-    ) {
-      break;
-    } else {
-      playerSelection = prompt(
-        "Incorrect response, please enter rock, paper, or scissors:",
-        "rock/paper/scissors"
-      );
-    }
-  }
+function userPlay(playerSelection) {
+  // let playerSelection = prompt(
+  //   "Please enter rock, paper, or scissors:",
+  //   "rock/paper/scissors"
+  // );
+  // while (true) {
+    // playerSelection = playerSelection.toLowerCase();
+  //   if (
+  //     playerSelection === "rock" ||
+  //     playerSelection === "paper" ||
+  //     playerSelection === "scissors"
+  //   ) {
+  //     break;
+  //   } else {
+  //     playerSelection = prompt(
+  //       "Incorrect response, please enter rock, paper, or scissors:",
+  //       "rock/paper/scissors"
+  //     );
+  //   }
+  // }
   return playerSelection;
 }
 
@@ -115,3 +115,18 @@ function game() {
     }
   }
 }
+
+const rock = document.querySelector('#rock');
+rock.addEventListener('click', () => {
+  playRound("rock", computerPlay());
+})
+
+const paper = document.querySelector('#paper')
+paper.addEventListener('click', () => {
+  playRound("paper", computerPlay());
+})
+
+const scissors = document.querySelector('#scissors')
+paper.addEventListener('click', () => {
+  playRound("scissors", computerPlay());
+})
