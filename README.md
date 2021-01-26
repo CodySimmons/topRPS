@@ -1,15 +1,14 @@
 # topRPS
+
 The Odin Project Rock Paper Scissor project
 
+Rock Paper Scissors with a graphical interface.
+Displays buttons for player to select for move they'll page,
+the current games score, and a reset button when a player reaches 5
+wins.
 
-Played in console, so create blank html page
-
-Will be vs an ai (just a random choice of rock paper scissors)
-Create function called computerPlay that returns a random result
-
-Create function the runs a single round of Rock Paper Scissors
-Create 2 functions for playerSelection and computerSelection, returns a string that declares the winner
-
-playerSelection takes input from user in form of text, is case insentive, Use prompt().
-
-Create functioon called game to run a 5 round game
+What I learned:
+How to select elements from a html page and add new children to them.
+How to manipulate elements and assign values, css text, or remove them from the DOM
+Using an event listener to see when a user clicks a button, and starting actions.
+Using a querySelectorAll to select all elements of a certain class, and setting them up as a group instead of individually.
