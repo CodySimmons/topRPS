@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Page Title</title>
+    <title>Rock Paper Scissors</title>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="RPSStyle.css" />
   </head>
   <body>
-    <div id="playerButtons"></div>
-    <button class="rock-button player-hand">Rock</button>
-    <button class="paper-button player-hand">Paper</button>
-    <button class="scissors player-hand">Scissors</button>
-
-    <div id="gameResultsDiv"></div>
-    <div id="winCounterDiv"></div>
-
-    <script src="script.js" defer></script>
+    <div class="page">
+      <div class="page-container">
+        <img src="websitelogo.png" />
+        <div id="gameResultsDiv"></div>
+        <div id="playerButtons">
+          <button class="rock-button player-hand"></button>
+          <button class="paper-button player-hand"></button>
+          <button class="scissors-button player-hand"></button>
+        </div>
+        <div id="winCounterDiv"></div>
+        <script src="script.js" defer></script>
+      </div>
+    </div>
   </body>
 </html>
