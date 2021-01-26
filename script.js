@@ -1,5 +1,8 @@
-let playerWinCount = 0;
-let computerWinCount = 0;
+//global
+var playerWinCount = 0;
+var computerWinCount = 0;
+
+const playerButtons = document.querySelectorAll(".player-hand");
 
 //randomizes computer's choice.
 function computerPlay() {
@@ -18,47 +21,28 @@ function computerPlay() {
   }
 }
 
-//window prompt for player's choice. lower cases player input for ease
-function userPlay(playerSelection) {
-  // let playerSelection = prompt(
-  //   "Please enter rock, paper, or scissors:",
-  //   "rock/paper/scissors"
-  // );
-  // while (true) {
-    // playerSelection = playerSelection.toLowerCase();
-  //   if (
-  //     playerSelection === "rock" ||
-  //     playerSelection === "paper" ||
-  //     playerSelection === "scissors"
-  //   ) {
-  //     break;
-  //   } else {
-  //     playerSelection = prompt(
-  //       "Incorrect response, please enter rock, paper, or scissors:",
-  //       "rock/paper/scissors"
-  //     );
-  //   }
-  // }
-  return playerSelection;
-}
-
-//return strings for game result, increases the winners score
+//increases the winners score, return strings for game result,
 function gameTie(playerSelection, computerSelection) {
   return `Tie! You both picked ${playerSelection}!`;
 }
 
 function gamePlayerWin(playerSelection, computerSelection) {
   playerWinCount++;
-  return `You win! ${playerSelection} beats ${computerSelection}`;
+  winCounter.textContent = `${playerWinCount} - ${computerWinCount}`;
+  return `You win the round! ${playerSelection} beats ${computerSelection}!`;
 }
 
 function gameComputerWin(playerSelection, computerSelection) {
   computerWinCount++;
-  return `You lose! ${computerSelection} beats ${playerSelection}`;
+  winCounter.textContent = `${playerWinCount} - ${computerWinCount}`;
+  return `You lose the round! ${computerSelection} beats ${playerSelection}!`;
 }
 
 //take player & computer's selection, runs logic to check if a win, lose, tie
 function playRound(playerSelection, computerSelection) {
+  console.log(`Player Choice ${playerSelection}`);
+  console.log(`Computer Choice ${computerSelection}`);
+
   if (playerSelection === "rock") {
     if (computerSelection === "Rock") {
       return gameTie(playerSelection, computerSelection);
@@ -75,7 +59,7 @@ function playRound(playerSelection, computerSelection) {
     } else {
       return gameComputerWin(playerSelection, computerSelection);
     }
-  } else {
+  } else if (playerSelection === "scissors") {
     if (computerSelection === "Rock") {
       return gameComputerWin(playerSelection, computerSelection);
     } else if (computerSelection === "Paper") {
@@ -116,17 +100,45 @@ function game() {
   }
 }
 
-const rock = document.querySelector('#rock');
-rock.addEventListener('click', () => {
-  playRound("rock", computerPlay());
-})
+function gameOverCheck() {
+  if (playerWinCount === 5 || computerWinCount === 5) {
+    if (playerWinCount === 5) {
+      gameResults.textContent += `\r\nCongratulations, you win the match!`;
+    } else {
+      gameResults.textContent += `\r\nYou lose the match!`;
+    }
+    let gameOverButton = document.createElement("button");
+    gameOverButton.innerText = "GAME OVER! Press to restart";
+    gameOverButton.addEventListener("click", () => {
+      location.reload();
+    });
+    playerButtons.forEach((btn) => {
+      btn.setAttribute("disabled", "");
+    });
+    document.body.appendChild(gameOverButton);
+  }
+}
 
-const paper = document.querySelector('#paper')
-paper.addEventListener('click', () => {
-  playRound("paper", computerPlay());
-})
+//ui
+playerButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    if (btn.classList.contains("rock-button")) {
+      gameResults.textContent = playRound("rock", computerPlay());
+    } else if (btn.classList.contains("paper-button")) {
+      gameResults.textContent = playRound("paper", computerPlay());
+    } else {
+      gameResults.textContent = playRound("scissors", computerPlay());
+    }
+    gameOverCheck();
+  });
+});
 
-const scissors = document.querySelector('#scissors')
-paper.addEventListener('click', () => {
-  playRound("scissors", computerPlay());
-})
+//game results text
+const gameResults = document.getElementById("gameResultsDiv");
+gameResults.style.cssText =
+  "background-color: lightgray; border: medium solid black";
+gameResults.textContent = "Please select you hand to start!";
+
+//win counter
+const winCounter = document.getElementById("winCounterDiv");
+winCounter.textContent = `${playerWinCount} - ${computerWinCount}`;
